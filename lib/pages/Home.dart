@@ -11,12 +11,16 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child:Column(
-        children: <Widget>[
-          ElevatedButton.icon(onPressed: (){
-            Navigator.pushNamed(context, '/location');
-          }, icon: Icon(Icons.edit_location_alt), label: Text("Change Location"),)
-        ],
+      child:Container(
+        color: Colors.grey[400],
+        child: Column(
+
+          children: <Widget>[
+            ElevatedButton.icon(onPressed: (){
+              Navigator.pushNamed(context, '/location');
+            }, icon: Icon(Icons.edit_location_alt), label: Text("Change Location"),)
+          ],
+        ),
       ),
     );
   }

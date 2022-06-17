@@ -3,11 +3,12 @@ import 'package:world_time_app/pages/Home.dart';
 import 'package:world_time_app/pages/Loading.dart';
 import 'package:world_time_app/pages/Choose_Location.dart';
 
+
 void main() {
 
   runApp(
     MaterialApp(
-      initialRoute: '/home',
+      initialRoute: '/',
       routes: {
         '/':(context)=> Loading(),
         '/home':(context)=> Home(),
