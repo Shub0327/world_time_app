@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
+import 'package:world_time_app/services/world_time.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -10,30 +10,44 @@ class Loading extends StatefulWidget {
 }
 class _LoadingState extends State<Loading> {
 
+  // String time="loading....";
+
   @override
   void initState() {
-    sendData();
-    print("h");
+    setWorldTime();
     super.initState();
 
   }
 
-  void sendData() async {
-
-    Response response = await get(Uri.parse('https://jsonplaceholder.typicode.com/todos/1'));
-    Map data = jsonDecode(response.body);
-     print(data['title']);
+  void setWorldTime() async {
+    WorldTime instance =
+        WorldTime(url: 'Asia/Kolkata',location: 'India', flag: 'India.png');
+    await instance.getTime();
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'location': instance.location,
+      'time': instance.time,
+      'flag': instance.flag,
+      'isDaytime' :instance.isDaytime,
+    });
+    // print(instance.time);
+    // setState(() {
+    //   time=instance.time;
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Text("Loading screen"),
-
-
-      ),
-    );
+    return Scaffold(
+      backgroundColor: Colors.blue,
+      body:Center(
+      child:
+         SpinKitSpinningLines(
+        color: Colors.white,
+        size: 50.0,
+       ),
+        ),
+      );
   }
 }
+
 
